@@ -1,0 +1,24 @@
+# Django #
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+media
+
+# Environments #
+.env
+*.env
+venv/
+env/
+dj/
+
+# PyCharm #
+.idea/
+
+# VS Code #
+.vscode/
+
+# Migrations #
+**/migrations/*.py
+**/migrations/*.pyc
