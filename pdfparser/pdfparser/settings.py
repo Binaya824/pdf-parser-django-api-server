@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-q8uw5m#q_07qzn)l%9ry$)w8+12bh=6$)e0!#io1k2*s$8gz*c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.31.171', 'localhost', '127.0.0.1' , '192.168.31.60']
+
 
 
 # Application definition
@@ -72,10 +73,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'pdfparser.wsgi.application'
 
 # Celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_BROKER_URL = 'redis://redis:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 

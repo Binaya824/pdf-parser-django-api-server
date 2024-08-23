@@ -5,17 +5,17 @@ from pdf2image import convert_from_bytes
 from io import BytesIO
 import numpy as np
 
-def extract_invoice_data_service(pdf_url):
-    print("===========================>>>>>>>>>>>" , pdf_url)
+def extract_invoice_data_service(pdf_file):
+    print("===========================>>>>>>>>>>>" , pdf_file)
     try:
-        file_id = pdf_url.split('/')[5]
-        direct_download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
-        # Download the PDF file
-        response = requests.get(direct_download_url)
-        response.raise_for_status()
+        # file_id = pdf_url.split('/')[5]
+        # direct_download_url = f"https://drive.google.com/uc?export=download&id={file_id}"
+        # # Download the PDF file
+        # response = requests.get(direct_download_url)
+        # response.raise_for_status()
         
         # Convert PDF to images
-        pdf_images = convert_from_bytes(response.content)
+        pdf_images = convert_from_bytes(pdf_file)
 
         # Initialize EasyOCR reader
         reader = easyocr.Reader(['en'], gpu=False)
@@ -66,7 +66,7 @@ def extract_invoice_data_service(pdf_url):
             for result in results:
                 bbox, text = result[0], result[1]
                 
-                if 'Original Invoice Number' or 'Invoice Number' in text:
+                if 'Original Invoice Number' in text:
                     match = re.search(r'Original Invoice Number\s*([^\s]+)', text)
                     if match:
                         page_data['InvoiceNumber']['text'] = match.group(1).strip()
